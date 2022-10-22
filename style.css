@@ -1,0 +1,49 @@
+body{
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    min-height: 100vh;
+    margin:0;
+    background: #131516;
+    color: white;
+}
+nav h1{
+    text-align: center;
+}
+footer{
+    text-align: center;
+}
+body main{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center ;
+    flex:auto;
+}
+main form{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+footer a{
+    text-decoration: none;
+}
+footer a:hover{
+    color: white;
+}
+#search-btn-container{
+    display: flex;
+    justify-content: center;
+}
+
+/*Styles for Weather-stats-container*/
+.weather-stats-container{
+    display: flex;
+    justify-content: center;
+    height: 500px;
+    width: 500px;
+    border-radius: 10px;
+    border: 1px black solid;
+}
+.weather-stats-container h1{
+    font-size: 1.5em;
+}
