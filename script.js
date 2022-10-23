@@ -9,4 +9,5 @@ const getWeatherFrom = async(country,city)=>{
 }
 getWeatherFrom('Argentina','Buenos Aires').then(data => {
     console.log(data);
+    console.log(data.main);
 })
