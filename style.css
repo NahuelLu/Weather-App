@@ -38,11 +38,17 @@ footer a:hover{
 /*Styles for Weather-stats-container*/
 .weather-stats-container{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: center;
     height: 500px;
     width: 500px;
     border-radius: 10px;
     border: 1px black solid;
+}
+.weather-stats-container p {
+    margin:0;
+    padding: 10px;
 }
 .weather-stats-container h1{
     font-size: 1.5em;
