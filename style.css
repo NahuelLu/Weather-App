@@ -19,6 +19,10 @@ body main{
     align-items: center ;
     flex:auto;
 }
+main{
+    display: flex;
+    flex-direction: column;
+}
 main form{
     display: flex;
     flex-direction: column;
@@ -41,10 +45,9 @@ footer a:hover{
     flex-direction: column;
     justify-content:center;
     align-items: center;
-    height: 500px;
     width: 500px;
     border-radius: 10px;
-    border: 1px black solid;
+    border: 1px solid black;
 }
 .weather-stats-container p {
     margin:0;
@@ -54,5 +57,7 @@ footer a:hover{
     font-size: 1.5em;
 }
 .weather-container{
-    border:1px solid black;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }

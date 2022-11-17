@@ -7,12 +7,18 @@ const getWeatherFrom = async(location)=>{ //Functions declared as a async functi
     const weatherData = await response.json();
     return weatherData; //When there's not problem with the fetched data from outside servers then return this.
 }
+const getGifFrom = async(name)=>{
+    const response = await fetch('https://api.giphy.com/v1/gifs/random?translate='+name+'&api_key=LGFus7KlS74qZMcqMVT4jnmPjtRhHDFb');
+    const dataGif = await response.json();
+    return dataGif;
+}
+
 const promise1 = getWeatherFrom('Argentina');// getWeatherFrom returns a promise.
 //If we want to get the data from what returns getWeatherFrom then we have to work as we working with promises.
 //We have to use .then to handle with promises outside of async functions.
 //Remember that's not okay to use wait ouside an async functions!
 const roundNumberToTwoDecimals = (number)=>{return Math.round(number * 100) / 100}
-const displayWeatherToPage= (weatherData)=>{
+const displayWeatherToPage= (weatherData,location)=>{
     let state = false;
     const countryNameTitle = document.createElement('h1');
     const dataContainer = document.createElement('div');
@@ -21,9 +27,9 @@ const displayWeatherToPage= (weatherData)=>{
     const maxTemp = document.createElement('p');
     const humidity = document.createElement('p');
     const feelsLike = document.createElement('p');
-    weatherContainer.appendChild(countryNameTitle);
     countryNameTitle.textContent= weatherData.name +' Current Weather';
     weatherContainer.appendChild(dataContainer);
+    dataContainer.appendChild(countryNameTitle);
     dataContainer.className='weather-stats-container';
     dataContainer.appendChild(temp);
     dataContainer.appendChild(maxTemp);
@@ -35,6 +41,11 @@ const displayWeatherToPage= (weatherData)=>{
     maxTemp.textContent = 'Max Temp: '+ weatherData.main.temp_max+' °C';
     minTemp.textContent = 'Min Temp: '+ weatherData.main.temp_min+' °C';
     humidity.textContent = 'Humidity: '+ weatherData.main.humidity;
+    const img = document.createElement('img');
+    dataContainer.appendChild(img);
+    getGifFrom(countryInput).then((data)=>{
+        img.src=data.data.images.original.url;
+    })
     const toogleBtn = createToogleButton(dataContainer);
     toogleBtn.addEventListener('click',()=>{
         if(state){
@@ -51,16 +62,16 @@ const displayWeatherToPage= (weatherData)=>{
             state = true;
         }
 
-    })
-}
+    })}
+
 const getWeather = (e)=>{
     e.preventDefault();
-    const location = countryInput.value;
-    getWeatherFrom(location).then(data => {
-        console.log(data);
-        displayWeatherToPage(data);
-    });
-    clearInputs(countryInput);
+    if(countryInput.value !==''){
+        getWeatherFrom(countryInput.value).then(data => {
+            displayWeatherToPage(data);
+            clearInputs(countryInput);
+        });
+    }
 }
 const createToogleButton = (container)=>{
     const toogleBtn = document.createElement('button');
